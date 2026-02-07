@@ -5,14 +5,14 @@
 
 ## IN-PROGRESS
 - Spring Boot backend setup
-- ReactJS web application setup
+- Implemented: POST /api/auth/register (commit: pending)
+- Implemented: POST /api/auth/login (commit: pending)
+- Implemented: GET /api/user/me (protected) (commit: pending)
+- Password encryption using BCrypt (commit: pending)
+- MySQL database integration (commit: pending)
+- ReactJS web application setup (Register, Login, Dashboard, Logout) (commit: pending)
+- FRS documentation update (Web screenshots only) (commit: pending)
 
 ## TODO
-- User registration API
-- User login API
-- Protected user profile endpoint
-- Password encryption using BCrypt
-- MySQL database integration
-- Web UI (Register, Login, Dashboard)
-- Logout functionality
-- FRS documentation update
+- Capture and add web UI screenshots to FRS
+- Update repository name if required by course format
