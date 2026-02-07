@@ -1,7 +1,7 @@
 # Task Checklist
 
 ## DONE
-- Repository setup and folder structure initialized
+- Repository setup and folder structure initialized (commit: a3f91c2)
 
 ## IN-PROGRESS
 - Spring Boot backend setup
