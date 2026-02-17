@@ -14,8 +14,8 @@
 - Added logout endpoint `/api/auth/logout` with token blacklist (commit: 2f7ce706)
 - Tightened token validation and protected access checks (commit: 2f7ce706)
 - Improved input validation and HTTP status codes for auth (commit: 2f7ce706)
-- Scaffolded Android Kotlin mobile app (Register, Login, Dashboard, Logout) (commit: 2f7ce706)
-- Updated README and FRS.md to include mobile and logout docs (commit: 2f7ce706)
+ - Scaffolded Android Kotlin mobile app (Register, Login, Dashboard, Logout) (commit: c4ddfe63)
+ - Updated README and FRS.md to include mobile and logout docs (commit: c4ddfe63)
 
 ## IN-PROGRESS
  - Capture and insert mobile and updated web screenshots into `docs/FRS.pdf`
