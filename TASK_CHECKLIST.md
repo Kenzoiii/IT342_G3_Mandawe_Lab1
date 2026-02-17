@@ -11,9 +11,16 @@
 - ReactJS web application setup (Register, Login, Dashboard, Logout) (commit: cc0f526)
 - FRS documentation update (Web screenshots only) (commit: cc0f526)
 
+- Added logout endpoint `/api/auth/logout` with token blacklist (commit: 2f7ce706)
+- Tightened token validation and protected access checks (commit: 2f7ce706)
+- Improved input validation and HTTP status codes for auth (commit: 2f7ce706)
+- Scaffolded Android Kotlin mobile app (Register, Login, Dashboard, Logout) (commit: 2f7ce706)
+- Updated README and FRS.md to include mobile and logout docs (commit: 2f7ce706)
+
 ## IN-PROGRESS
- 
+ - Capture and insert mobile and updated web screenshots into `docs/FRS.pdf`
 
 ## TODO
-- Capture and add web UI screenshots to FRS
-- Update repository name if required by course format
+ - Export `docs/FRS.md` as `docs/FRS.pdf` (final)
+ - Verify emulator and device connectivity to backend
+ - Update repository name if required by course format

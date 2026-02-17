@@ -12,13 +12,14 @@ This project implements a user registration and authentication system with a Spr
 ## Project Structure
 - /backend - Spring Boot backend
 - /web - ReactJS web application
-- /mobile - Mobile application (to be implemented)
+- /mobile - Android Kotlin mobile application
 - /docs - Documentation (FRS, diagrams, screenshots)
 
 ## API Endpoints
 - POST /api/auth/register
 - POST /api/auth/login
-- GET /api/user/me (protected)
+- POST /api/auth/logout (requires Authorization header)
+- GET /api/user/me (protected; requires Authorization header)
 
 ## How to Run Backend
 1. Ensure MySQL is running and create database `it342_g3_mandawe`.
@@ -45,4 +46,11 @@ npm run dev
 Open the printed local URL (typically `http://localhost:5173`).
 
 ## How to Run Mobile App
-Will be implemented in the next lab. Currently not required.
+Android Kotlin app is under `/mobile`.
+
+Recommended: open the `/mobile` folder in Android Studio (latest), let it import the Gradle project, then run on an emulator.
+
+Notes:
+- Backend base URL on Android emulator is `http://10.0.2.2:8081`.
+- Activities included: Login, Register, Dashboard (protected), and Logout.
+- Logout calls `/api/auth/logout` and clears local token.
