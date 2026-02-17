@@ -27,7 +27,13 @@ class LoginActivity : AppCompatActivity() {
 
         loginBtn.setOnClickListener {
             message.text = ""
-            val req = LoginRequest(email.text.toString(), password.text.toString())
+            val emailText = email.text.toString().trim()
+            val passwordText = password.text.toString()
+            if (emailText.isEmpty() || passwordText.isEmpty()) {
+                message.text = "Email and password are required"
+                return@setOnClickListener
+            }
+            val req = LoginRequest(emailText, passwordText)
             ApiClient.service.login(req).enqueue(object : Callback<LoginResponse> {
                 override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
                     val body = response.body()
@@ -37,7 +43,8 @@ class LoginActivity : AppCompatActivity() {
                         startActivity(Intent(this@LoginActivity, DashboardActivity::class.java))
                         finish()
                     } else {
-                        message.text = body?.message ?: "Login failed"
+                        val err = try { response.errorBody()?.string() } catch (_: Exception) { null }
+                        message.text = body?.message ?: err ?: "Login failed"
                     }
                 }
                 override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
