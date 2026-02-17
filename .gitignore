@@ -1,0 +1,21 @@
+# Java / Spring Boot
+backend/target/
+backend/.idea/
+backend/.classpath
+backend/.project
+backend/.settings/
+
+# Node/Web
+web/node_modules/
+web/.vite/
+web/dist/
+
+# Android/Gradle
+mobile/.gradle/
+mobile/build/
+mobile/app/build/
+mobile/.idea/
+
+# OS
+.DS_Store
+Thumbs.db
