@@ -1,7 +1,7 @@
 # Task Checklist
 
 ## DONE
-- Repository setup and folder structure initialized (commit: a3f91c2)
+ - Repository setup and folder structure initialized (commit: 67641a5)
 - Spring Boot backend setup (commit: cc0f526)
 - Implemented: POST /api/auth/register (commit: cc0f526)
 - Implemented: POST /api/auth/login (commit: cc0f526)
