@@ -19,8 +19,8 @@
 
 ## IN-PROGRESS
  - Capture and insert mobile and updated web screenshots into `docs/FRS.pdf`
+ - Verify emulator and device connectivity to backend
+ - Create Mobile App and connect to backend
 
 ## TODO
- - Export `docs/FRS.md` as `docs/FRS.pdf` (final)
- - Verify emulator and device connectivity to backend
- - Update repository name if required by course format
+ 
