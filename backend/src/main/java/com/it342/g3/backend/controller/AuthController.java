@@ -2,8 +2,11 @@ package com.it342.g3.backend.controller;
 
 import com.it342.g3.backend.model.User;
 import com.it342.g3.backend.service.AuthService;
+import com.it342.g3.backend.service.TokenBlacklist;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -16,16 +19,33 @@ public class AuthController {
     @Autowired
     private AuthService authService;
 
+    @Autowired
+    private TokenBlacklist tokenBlacklist;
+
     @PostMapping("/register")
-    public Map<String, String> register(@RequestBody RegisterRequest request) {
+    public ResponseEntity<Map<String, String>> register(@RequestBody RegisterRequest request) {
         Map<String, String> response = new HashMap<>();
-        if(authService.getAllUsers().stream().anyMatch(u -> u.getUsername().equals(request.getUsername()))) {
-            response.put("message", "Username already exists");
-            return response;
+        // Basic validation
+        if (request.getUsername() == null || request.getUsername().trim().isEmpty()) {
+            response.put("message", "Username is required");
+            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
         }
-        if(authService.getAllUsers().stream().anyMatch(u -> u.getEmail().equals(request.getEmail()))) {
+        if (request.getEmail() == null || request.getEmail().trim().isEmpty()) {
+            response.put("message", "Email is required");
+            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+        }
+        if (request.getPassword() == null || request.getPassword().length() < 6) {
+            response.put("message", "Password must be at least 6 characters");
+            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+        }
+
+        if (authService.getAllUsers().stream().anyMatch(u -> u.getUsername().equals(request.getUsername()))) {
+            response.put("message", "Username already exists");
+            return new ResponseEntity<>(response, HttpStatus.CONFLICT);
+        }
+        if (authService.getAllUsers().stream().anyMatch(u -> u.getEmail().equals(request.getEmail()))) {
             response.put("message", "Email already exists");
-            return response;
+            return new ResponseEntity<>(response, HttpStatus.CONFLICT);
         }
 
         User user = new User();
@@ -36,23 +56,40 @@ public class AuthController {
 
         authService.registerUser(user);
         response.put("message", "User registered successfully");
-        return response;
+        return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
     @PostMapping("/login")
-    public Map<String, String> login(@RequestBody LoginRequest request) {
+    public ResponseEntity<Map<String, String>> login(@RequestBody LoginRequest request) {
         Map<String, String> response = new HashMap<>();
+        if (request.getEmail() == null || request.getPassword() == null) {
+            response.put("message", "Email and password are required");
+            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+        }
         User user = authService.authenticateUser(request.getEmail(), request.getPassword());
-        if(user == null) {
+        if (user == null) {
             response.put("message", "Invalid email or password");
-            return response;
+            return new ResponseEntity<>(response, HttpStatus.UNAUTHORIZED);
         }
         String token = authService.generateToken(user);
         response.put("message", "Login successful");
         response.put("token", token);
         response.put("username", user.getUsername());
         response.put("role", user.getRole());
-        return response;
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @PostMapping("/logout")
+    public ResponseEntity<Map<String, String>> logout(@RequestHeader(value = "Authorization", required = false) String authorization) {
+        Map<String, String> response = new HashMap<>();
+        if (authorization == null || !authorization.startsWith("Bearer ")) {
+            response.put("message", "Authorization header missing");
+            return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+        }
+        String token = authorization.substring("Bearer ".length());
+        tokenBlacklist.blacklist(token);
+        response.put("message", "Logged out successfully");
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
     // DTOs
