@@ -17,9 +17,9 @@
  - Scaffolded Android Kotlin mobile app (Register, Login, Dashboard, Logout) (commit: c4ddfe6)
  - Updated README and FRS.md to include mobile and logout docs (commit: c4ddfe6)
 
- - Create Mobile App and connect to backend (commit: c4ddfe6)
- - Verify emulator and device connectivity to backend (commit: 63ef6b9)
- - Capture and insert mobile and updated web screenshots into `docs/FRS.pdf` (commit: c4ddfe6)
+ - Create Mobile App and connect to backend (commit: 6edc7d3)
+ - Verify emulator and device connectivity to backend (commit: 6edc7d3)
+ - Capture and insert mobile and updated web screenshots into `docs/FRS.pdf` (commit: 6edc7d3)
 
 ## IN-PROGRESS
  - None
